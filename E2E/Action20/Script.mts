@@ -24,7 +24,9 @@ TypeTextBox.SetText "DZ"
 AIUtil("text_box", "Document Date:").SetText FormatDateTime(Date, 2)
 AIUtil("button", "Post").Click
 AIUtil.Context.Unfreeze
-AIUtil.FindTextBlock("Help").Click
+If Parameter.Item("FioriOrGUI") = "Fiori" Then
+	AIUtil.FindTextBlock("Help").Click
+End If
 AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 Set DocumentConfirmationMessage = AIRegex("Document \d+ was posted in company code \d+")
 AIUtil.FindTextBlock(DocumentConfirmationMessage).CheckExists True
