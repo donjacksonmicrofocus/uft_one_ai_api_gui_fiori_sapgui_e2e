@@ -8,8 +8,8 @@ End If
 AIUtil("text_box", "Actual GI Date:").SetText FormatDateTime(Date, 2)
 AIUtil.FindTextBlock("Picking").Click
 
-AIUtil.Context.Freeze
 XtoClick = (AIUtil.FindTextBlock("SLoc").GetObjectProperty ("width") /2)
+AIUtil.Context.Freeze
 YtoClick = (AIUtil.FindTextBlock("SLoc").GetObjectProperty ("y") - (AIUtil.FindTextBlock("1710").GetObjectProperty ("y") + (AIUtil.FindTextBlock("1710").GetObjectProperty ("height")/2))) * -1
 'print "Click at " & XtoClick & ", " & YtoClick
 AIUtil.FindTextBlock("SLoc").Click XtoClick, YtoClick
