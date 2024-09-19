@@ -1,6 +1,6 @@
 ﻿SystemUtil.Run "C:\Program Files (x86)\OpenText\UFT One\samples\Flights Application\FlightsGUI.exe"
 
-AIUtil.SetContext WpfWindow( "regexpwndtitle:=OpenText MyFlight Sample Application")
+AIUtil.SetContext WpfWindow("wpftypename:=window", "regexpwndtitle:=OpenText MyFlight Sample Application", "devname:=OpenText MyFlight Sample Application")
 AIUtil("text_box", "Username").SetText "john"
 AIUtil("text_box", "Password").SetText "HP"
 AIUtil("button", "OK").Click
