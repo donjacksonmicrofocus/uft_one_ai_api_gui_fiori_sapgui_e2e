@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ID>a2e9dc4c-6035-4569-82f6-9d8b0bd65746</ID>
+  <Name>Flights_SO</Name>
+  <Type>WSDL</Type>
+  <Version>1</Version>
+  <CreationDate>2024-07-19T20:43:54.7118992+00:00</CreationDate>
+  <UpdateDate>2024-07-19T20:43:54.7118992+00:00</UpdateDate>
+  <LoaderID>SignatureResourceHandler</LoaderID>
+  <MetaDataSignatureFile>20f473fa-6a32-4596-8623-8bc7d555aa40.xml</MetaDataSignatureFile>
+  <TestResourceId>20f473fa-6a32-4596-8623-8bc7d555aa40</TestResourceId>
+  <RepositoryType>TestRepository</RepositoryType>
+  <SignatureCodonId>HP.ST.WebServiceWsdl</SignatureCodonId>
+  <SignatureAddinVersion>2024.2.0.185</SignatureAddinVersion>
+  <Properties>
+    <Item>
+      <Key>
+        <string>RepositoryPath</string>
+      </Key>
+      <Value>
+        <string>C:\Users\demo\Documents\UFT One\github\uft_one_ai_api_gui_fiori_sapgui_e2e\FlightsAPI1\EmbeddedResources</string>
+      </Value>
+    </Item>
+    <Item>
+      <Key>
+        <string>ResourceOrigin</string>
+      </Key>
+      <Value>
+        <string>C:\Users\demo\Documents\UFT One\github\uft_one_ai_api_gui_fiori_sapgui_e2e\FlightsAPI1\EmbeddedResources\Flights_SO_1</string>
+      </Value>
+    </Item>
+    <Item>
+      <Key>
+        <string>PrototypeDbVersion</string>
+      </Key>
+      <Value>
+        <string>2024.2.0.185</string>
+      </Value>
+    </Item>
+  </Properties>
+</ResourceManifest>
