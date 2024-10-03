@@ -8,9 +8,11 @@ AIUtil("button", "Save").Click
 AppContext.Sync																			'Wait for the browser to stop spinning
 Set OrderConfirmationMessage = AIRegex("Standard Order \d+ has been saved")
 AIUtil.FindTextBlock(OrderConfirmationMessage).CheckExists TRUE
-AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil("button", "Save")).CheckExists True
+AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock(OrderConfirmationMessage)).CheckExists True
+'AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil("button", "Save")).CheckExists True
 'StatusBarText = AIUtil.FindTextBlock(micAnyText, micWithAnchorOnLeft, AIUtil("check_box", micAnyText, micWithAnchorOnRight, AIUtil("button", "Save"))).GetText
-StatusBarText = AIUtil.FindTextBlock(micAnyText, micWithAnchorOnLeft, AIUtil("check_mark")).GetText
+StatusBarText = AIUtil.FindTextBlock(OrderConfirmationMessage).GetText
+'StatusBarText = AIUtil.FindTextBlock(micAnyText, micWithAnchorOnLeft, AIUtil("check_mark")).GetText
 StatusBarArray = Split(StatusBarText," ")
 print "The Order number is " & StatusBarArray(2)
 Parameter("NewOrderNumber") = StatusBarArray(2)
