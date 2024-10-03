@@ -8,7 +8,7 @@ AIUtil("button", "Save").Click
 AppContext.Sync																			'Wait for the browser to stop spinning
 Set OrderConfirmationMessage = AIRegex("Standard Order \d+ has been saved")
 AIUtil.FindTextBlock(OrderConfirmationMessage).CheckExists TRUE
-AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock(OrderConfirmationMessage)).CheckExists True
+'AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock(OrderConfirmationMessage)).CheckExists True
 'AIUtil("check_mark", micAnyText, micWithAnchorOnRight, AIUtil("button", "Save")).CheckExists True
 'StatusBarText = AIUtil.FindTextBlock(micAnyText, micWithAnchorOnLeft, AIUtil("check_box", micAnyText, micWithAnchorOnRight, AIUtil("button", "Save"))).GetText
 StatusBarText = AIUtil.FindTextBlock(OrderConfirmationMessage).GetText

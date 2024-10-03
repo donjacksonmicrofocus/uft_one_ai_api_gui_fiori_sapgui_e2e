@@ -30,6 +30,9 @@ objSendKey.SendKeys DataTable.Value("OrderQuantity", "05_va01_order_details")
 AIUtil.Context.UnFreeze
 
 AIUtil.FindTextBlock("Post Goods Issue").Click
+If AIUtil("check_mark").Exist(60) = FALSE Then
+	Reporter.ReportEvent micFail, "Delivery Number Creation", "The delivery number creation check mark status message didn't display within 60 seconds."
+End If
 AIUtil("check_mark").Click
 AIUtil.FindTextBlock("Outbound Delivery " & DataTable.Value("DeliveryNumber") & " has been saved").CheckExists True
 AIUtil.FindTextBlock("Exit").Click
