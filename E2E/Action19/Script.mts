@@ -5,9 +5,12 @@ If Parameter.Item("FioriOrGUI") = "Fiori" Then
 	AIUtil.SetContext AppContext																'Tell the AI engine to point at the application
 	RunAction "01_Login", oneIteration
 
-	AIUtil("search").Click
-	AIUtil("text_box", "Search").SetText "post incoming payments"
-	AIUtil("search").Click
+'	AIUtil("search").Click
+'	'	Search field text box label changed for S/4 HANA 2023 over 1909
+'	'AIUtil("text_box", "Search").SetText "post incoming payments"
+'	AIUtil("text_box", micAnyText, micWithAnchorOnRight, AIUtil("search")).SetText "post incoming payments"
+'	AIUtil("search").Click
+	AIUtil("search").Search "post incoming payments"
 	AppContext.Sync																			'Wait for the browser to stop spinning
 	
 	counter = 0
@@ -30,7 +33,8 @@ If Parameter.Item("FioriOrGUI") = "Fiori" Then
 Loop Until AIUtil.FindTextBlock("Post Incoming Payments: Header Data").Exist(10)
 
 ElseIf Parameter.Item("FioriOrGUI") = "GUI" Then
-	SAPGuiUtil.AutoLogon "S/4HANA 2020 FPS01", "100", "s4h_sd_dem", "Welcome1", "EN"
+'	SAPGuiUtil.AutoLogon "S/4HANA 2020 FPS01", "100", "s4h_sd_dem", "Welcome1", "EN"
+	SAPGuiUtil.AutoLogon "S4H (S/4 Hana 2023)", "100", "s4h_sd_dem", "Welcome1", "EN"
 	AIUtil.SetContext SAPGuiSession("micclass:=SAPGuiSession")
 			
 	SAPGuiSession("Session").SAPGuiWindow("SAP Easy Access").Maximize @@ hightlight id_;_0_;_script infofile_;_ZIP::ssf1.xml_;_

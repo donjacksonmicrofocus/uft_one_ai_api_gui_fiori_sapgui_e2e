@@ -2,9 +2,11 @@
 If Parameter.Item("OrderNumber") = "Default" Then
 	Parameter.Item("OrderNumber") = DataTable.Value("OrderNumber")
 End If
-AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
+
+AIUtil.FindTextBlock("Sales Order Data").Click
+'AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 AIUtil("text_box", "Order:").SetText Parameter.Item("OrderNumber")
-AIUtil.RunSettings.OCR.UseConfigSet AI_OCR
+'AIUtil.RunSettings.OCR.UseConfigSet AI_OCR
 
 AIUtil.FindTextBlock("Sales Order Data").Click
 AIUtil("button", "Continue").Click

@@ -21,13 +21,23 @@ AIUtil("text_box", "User").SetText "s4h_sd_dem"
 AIUtil("text_box", "Password").SetText "Welcome1"
 AIUtil("button", "Log On").Click
 AppContext.Sync																			'Wait for the browser to stop spinning
+WasEnabled = AIUtil.RunSettings.AutoScroll.IsEnabled
+OrigDirection = AIUtil.RunSettings.AutoScroll.GetDirection
+OrigMax = AIUtil.RunSettings.AutoScroll.GetMaxNumberOfScrolls
+AIUtil.RunSettings.AutoScroll.Disable
 counter = 0
 Do
 	counter = counter + 1
 	wait 1
 	If counter >= 60 Then
-		msgbox "The search icon didn't show up within " & counter & " tries, check application."
+		msgbox "The help icon didn't show up within " & counter & " tries, check application."
 		ExitTest
 	End If
-Loop Until AIUtil("search").Exist
+Loop Until AIUtil("help").Exist(0)
+
+If WasEnabled Then
+    AIUtil.RunSettings.AutoScroll.Enable OrigDirection, OrigMax
+Else
+    AIUtil.RunSettings.AutoScroll.Disable
+End If
 

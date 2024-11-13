@@ -3,9 +3,12 @@
 Set AppContext=Browser("CreationTime:=0")												'Set the variable for what application (in this case the browser) we are acting upon
 AIUtil.SetContext AppContext																'Tell the AI engine to point at the application
 
-AIUtil("search").Click
-AIUtil("text_box", "Search").SetText "vf01"
-AIUtil("search").Click
+'AIUtil("search").Click
+''	Search field text box label changed for S/4 HANA 2023 over 1909
+''AIUtil("text_box", "Search").SetText "vf01"
+'AIUtil("text_box", micAnyText, micWithAnchorOnRight, AIUtil("search")).SetText "vf01"
+'AIUtil("search").Click
+AIUtil("search").Search "vf01"
 AppContext.Sync																			'Wait for the browser to stop spinning
 
 counter = 0
@@ -25,7 +28,9 @@ Do
 		msgbox "The Create Billing text block isn't disappearing like it should, check application"
 		ExitTest
 	End If
-Loop Until AIUtil.FindTextBlock("Create Billing Document").Exist(10)
+'DJ241112	S/4 HANA 2023 header for screen changed
+'Loop Until AIUtil.FindTextBlock("Create Billing Document").Exist(10)
+Loop Until AIUtil.FindTextBlock("Create Billing Documents - VF01").Exist(10)
 
-AIUtil.FindTextBlock("Create Billing Document").CheckExists True
+AIUtil.FindTextBlock("Create Billing Documents - VF01").CheckExists True
 

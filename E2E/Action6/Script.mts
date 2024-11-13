@@ -19,8 +19,22 @@ End If
 
 AIUtil("plus").Click
 AIUtil("search", micAnyText, micFromBottom, 1).CheckExists True
-'the automation keeps overrunning the application
+
+XtoClick = (AIUtil.FindTextBlock("Material").GetObjectProperty ("width") /2)
+'Need to figure out YtoClick
+Set YObject = AIUtil("button", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock("Req. Segment"))
+YObject.CheckExists True
+YtoClick = (AIUtil.FindTextBlock("Material").GetObjectProperty ("y") - (YObject.GetObjectProperty ("y") + (YObject.GetObjectProperty ("height")/2))) * -1
+AIUtil.Context.Freeze
+'print "Click at " & XtoClick & ", " & YtoClick
+AIUtil.FindTextBlock("Material").Click XtoClick, YtoClick
+'The below wait statement is to allow the application to register the click and make the cell editable
 wait 1
+set objSendKey=CreateObject("WScript.shell")
+'Material Number from Parameter
+'objSendKey.SendKeys Parameter.Item("Material")
+'the automation keeps overrunning the application
+'wait 1
 set objSendKey=CreateObject("WScript.shell")
 objSendKey.SendKeys "+{TAB}"
 objSendKey.SendKeys Parameter.Item("Item")
@@ -32,3 +46,4 @@ objSendKey.SendKeys Parameter.Item("OrderQuantity")
 objSendKey.SendKeys "{TAB}"
 objSendKey.SendKeys Parameter.Item("UnitOfMeasure")
 
+'AIUtil("button", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock("Req. Segment")).Click

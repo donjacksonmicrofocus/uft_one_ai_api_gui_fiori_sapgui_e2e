@@ -1,4 +1,6 @@
 ﻿AIUtil.SetContext Browser("creationtime:=0")
+
+'AIUtil("close", micAnyText, micWithAnchorOnLeft, AIUtil.FindTextBlock("Performance Assistant")).Click
 AIUtil.FindTextBlock("Exit").Click
 Browser("creationtime:=0").Sync																			'Wait for the browser to stop spinning
 Set ResultsMessage = AIRegex("Results (\d+)")

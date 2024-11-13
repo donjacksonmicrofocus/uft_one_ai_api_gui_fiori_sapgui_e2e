@@ -5,7 +5,8 @@ If Parameter.Item("DeliveryNumber") = "Default" Then
 	Parameter.Item("DeliveryNumber") = DataTable.Value("DeliveryNumber")
 End If
 
-AIUtil("text_box", "Actual GI Date:").SetText FormatDateTime(Date, 2)
+'AIUtil("text_box", "Actual GI Date:").SetText FormatDateTime(Date, 2)
+AIUtil("text_box", "Actual GI Date:").SetText "03/30/2024"
 AIUtil.FindTextBlock("Picking").Click
 
 XtoClick = (AIUtil.FindTextBlock("SLoc").GetObjectProperty ("width") /2)
@@ -34,7 +35,9 @@ If AIUtil("check_mark").Exist(60) = FALSE Then
 	Reporter.ReportEvent micFail, "Delivery Number Creation", "The delivery number creation check mark status message didn't display within 60 seconds."
 End If
 AIUtil("check_mark").Click
-AIUtil.FindTextBlock("Outbound Delivery " & DataTable.Value("DeliveryNumber") & " has been saved").CheckExists True
+'DJ241112	S/4 HANA 2023 says "Outbound Delivery <DeliveryNumber> saved, material document <MaterialDocumentID> created"
+'AIUtil.FindTextBlock("Outbound Delivery " & DataTable.Value("DeliveryNumber") & " has been saved").CheckExists True
+AIUtil.FindText("Outbound Delivery " & DataTable.Value("DeliveryNumber") & " saved").CheckExists True
 AIUtil.FindTextBlock("Exit").Click
 Set ResultsMessage = AIRegex("Results (\d+)")
 AIUtil.FindTextBlock(ResultsMessage).CheckExists True

@@ -4,10 +4,15 @@ Set AppContext=Browser("CreationTime:=0")												'Set the variable for what 
 AIUtil.SetContext AppContext																'Tell the AI engine to point at the application
 
 'Sometimes the Fiori application isn't responsive enough to use the complex search statement, the entering of the value into the field overruns the app
-'AIUtil("search").Search "va01"
-AIUtil("search").Click
-AIUtil("text_box", "Search").SetText "va01"
-AIUtil("search").Click
+'	turns out until the help icon is loaded (in Fiori), the search box doesn't actually function.  Added sync logic to 01_Login to wait for the help icon to show up
+'	before marking login as complete
+AIUtil("search").Search "va01"
+'AIUtil("search").Click
+''	Search field text box label changed for S/4 HANA 2023 over 1909
+''AIUtil("text_box", "Search").SetText "va01"
+'AIUtil.FindText("Search In:").Hover
+'AIUtil("text_box", micAnyText, micWithAnchorOnRight, AIUtil("search")).SetText "va01"
+'AIUtil("search").Click
 AppContext.Sync																			'Wait for the browser to stop spinning
 counter = 0
 Do

@@ -2,9 +2,13 @@
 SystemUtil.Run "C:\Program Files (x86)\OpenText\UFT One\samples\Flights Application\FlightsAPI.exe"
 
 AIUtil.SetContext WpfWindow("wpftypename:=window", "regexpwndtitle:=OpenText Flights Service APIs", "devname:=OpenText Flights Service APIs")
+
+AIUtil.FindTextBlock("The OpenText Flights service is running").Hover
 AIUtil.FindTextBlock("The OpenText Flights service is running").CheckExists True
-'RunAPITest "FlightsAPI1" ,APIOrderNum,APIFlightNum,APIAirline
-RunAPITest "FlightsAPI1_1" ,Parameter("APIOrderNum"),Parameter("APIFlightNum"),Parameter("APIAirline")
+'dj241112	Converted to relative pathing for the API test call
+'RunAPITest "FlightsAPI1_1" ,Parameter("APIOrderNum"),Parameter("APIFlightNum"),Parameter("APIAirline")
+RunAPITest "FlightsAPI1" ,Parameter("APIOrderNum"),Parameter("APIFlightNum"),Parameter("APIAirline")
+
 DataTable.Value("APIOrderNum") = Parameter("APIOrderNum")
 DataTable.Value("APIFlightNum") = Parameter("APIFlightNum")
 DataTable.Value("APIAirline") = Parameter("APIAirline")

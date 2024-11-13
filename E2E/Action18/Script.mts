@@ -1,7 +1,9 @@
 ﻿Set AppContext=Browser("CreationTime:=0")												'Set the variable for what application (in this case the browser) we are acting upon
 AIUtil.SetContext AppContext																'Tell the AI engine to point at the application
-
-AIUtil.Table.Cell(1, 0).SetText DataTable.Value("DeliveryNumber")
+'DJ241112	AIOD no longer recognizes the table upon first navigation to the screen
+'AIUtil.Table.Cell(1, 0).SetText DataTable.Value("DeliveryNumber")
+AIUtil("radio_button", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock("Document")).SetState "On"
+AIUtil.Table(micFromTop, 1).Cell(1, 1).SetText DataTable.Value("DeliveryNumber")
 AIUtil("button", "Save").Click
 
 Set OrderConfirmationMessage = AIRegex("Document \d+ has been saved")
