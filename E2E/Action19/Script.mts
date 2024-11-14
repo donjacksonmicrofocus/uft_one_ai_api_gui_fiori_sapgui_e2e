@@ -21,7 +21,7 @@ If Parameter.Item("FioriOrGUI") = "Fiori" Then
 			msgbox "The search returning the text Apps didn't display within " & counter & " attempts.  Check the application."
 			ExitTest
 		End If
-	Loop Until AIUtil.FindTextBlock("Apps").Exist
+	Loop Until (AIUtil.FindTextBlock("Apps").Exist(0) or AIUtil.FindTextBlock("Apps",micFromTop, 1).Exist(0))
 	counter = 0
 	Do
 		counter = counter + 1
