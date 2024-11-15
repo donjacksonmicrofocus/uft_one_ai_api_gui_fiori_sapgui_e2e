@@ -51,8 +51,8 @@ Default Profile=default.usp
 Lang=none
 
 [TulipInfo]
-ProductName=OpenText UFT One
-Version=24.2
+ProductName=OpenText Functional Testing
+Version=24.4
 
 [TulipAddins]
 AF=
