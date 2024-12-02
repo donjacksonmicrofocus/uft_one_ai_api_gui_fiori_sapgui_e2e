@@ -8,6 +8,7 @@ OrigDirection = AIUtil.RunSettings.AutoScroll.GetDirection
 OrigMax = AIUtil.RunSettings.AutoScroll.GetMaxNumberOfScrolls
 AIUtil.RunSettings.AutoScroll.Disable
 counter = 0
+AIUtil.FindTextBlock("SS").Click
 Do
 	AIUtil.FindTextBlock("SS").Click
 	counter = counter + 1

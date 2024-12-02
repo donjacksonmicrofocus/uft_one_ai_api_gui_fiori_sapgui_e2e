@@ -5,8 +5,13 @@ AIUtil.SetContext AppContext																'Tell the AI engine to point at the 
 'DJ241115	24.4 AIOD table recognition is significantly improved, changing to use table again
 'AIUtil("radio_button", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock("Document")).SetState "On"
 'AIUtil.Table(micFromTop, 1).Cell(1, 1).SetText DataTable.Value("DeliveryNumber")
+AIUtil.FindTextBlock("Billing Date:").Click
+AIUtil.Context.Freeze 
+'AIUtil("radio_button", micAnyText, micWithAnchorOnRight, AIUtil.FindTextBlock("Document")).SetState "On"
+AIUtil.Table.Cell(1, 1).Click
 AIUtil.Table.Cell(1, 1).SetText DataTable.Value("DeliveryNumber")
 AIUtil("button", "Save").Click
+AIUtil.Context.UnFreeze 
 
 Set OrderConfirmationMessage = AIRegex("Document \d+ has been saved")
 AIUtil.FindTextBlock(OrderConfirmationMessage).CheckExists TRUE
