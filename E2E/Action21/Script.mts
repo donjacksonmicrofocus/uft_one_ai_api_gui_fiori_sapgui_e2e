@@ -1,4 +1,4 @@
-﻿
+﻿AIUtil.RunSettings.OCR.UseConfigSet AI_OCR
 SystemUtil.Run "C:\Program Files (x86)\OpenText\UFT One\samples\Flights Application\FlightsAPI.exe"
 
 AIUtil.SetContext WpfWindow("wpftypename:=window", "regexpwndtitle:=OpenText Flights Service APIs", "devname:=OpenText Flights Service APIs")
