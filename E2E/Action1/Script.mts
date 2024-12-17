@@ -45,6 +45,18 @@ Do
 		ExitTest
 	End If
 Loop Until AIUtil("help").Exist(0)
+'DJ20241217  Additional synchronization logic to make sure that the full search functionality has loaded prior to proceeding beyond the login action
+
+AIUtil("search").Click
+counter = 0
+Do
+	counter = counter + 1
+	If counter >= 60 Then
+		msgbox "The global search box isn't functional within " & counter & " tries, check application."
+		ExitTest
+	End If
+Loop Until AIUtil.FindText("Search In:").Exist(0)
+AIUtil("search").Click
 
 If WasEnabled Then
     AIUtil.RunSettings.AutoScroll.Enable OrigDirection, OrigMax
