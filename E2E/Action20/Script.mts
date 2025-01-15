@@ -64,9 +64,21 @@ Else
 End If
 
 SetupPostIncomingPayments
+'Set AppContext = SAPGuiSession("micclass:=SAPGuiSession")
+'AIUtil.SetContext AppContext
+'
+If AIUtil.FindText("Posting takes place in previous fiscal year").Exist(5) Then
+	AIUtil.FindText("Posting takes place in previous fiscal year").CheckExists True
+'	AIUtil.FindText("Document Date: *").Type micReturn
+	SAPGuiSession("Session").SAPGuiWindow("Post Incoming Payments:").SendKey ENTER @@ hightlight id_;_0_;_script infofile_;_ZIP::ssf1.xml_;_
+'	set objSendKey=CreateObject("WScript.shell")
+'	wait 1
+'	objSendKey.SendKeys "{ENTER}"
+	
+End If
 
 If AIUtil.FindText("The difference is too large for clearing").Exist(0) Then
-
+ @@ hightlight id_;_0_;_script infofile_;_ZIP::ssf1.xml_;_
 	
 	AIUtil.FindTextBlock("15.00", micFromTop, 1).DoubleClick
 	AIUtil("button", "Post").Click
