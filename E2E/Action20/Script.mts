@@ -21,6 +21,7 @@ Function SetupPostIncomingPayments
 	AIUtil.Context.Freeze 
 	'AIUtil("text_box", "Account:", micFromBottom, 1).SetText "EWM17-CU02"
 	SAPGUISetText AIUtil("text_box", "Account:", micFromBottom, 1), "EWM17-CU02", "Account:"
+	SAPGUISetText AIUtil("text_box", "Account:", micFromBottom, 1), "EWM17-CU02", "Account:"
 	'AIUtil("text_box", "Value date:").SetText "03/10/2024"
 	SAPGUISetText AIUtil("text_box", "Value date:"), "03/10/2024", "Value date:"
 	'AIUtil("text_box", "Amount").SetText Parameter.Item("AmountAssigned")
@@ -67,35 +68,36 @@ SetupPostIncomingPayments
 'Set AppContext = SAPGuiSession("micclass:=SAPGuiSession")
 'AIUtil.SetContext AppContext
 '
-If AIUtil.FindText("Posting takes place in previous fiscal year").Exist(5) Then
-	AIUtil.FindText("Posting takes place in previous fiscal year").CheckExists True
-'	AIUtil.FindText("Document Date: *").Type micReturn
-	SAPGuiSession("Session").SAPGuiWindow("Post Incoming Payments:").SendKey ENTER @@ hightlight id_;_0_;_script infofile_;_ZIP::ssf1.xml_;_
-'	set objSendKey=CreateObject("WScript.shell")
-'	wait 1
-'	objSendKey.SendKeys "{ENTER}"
-	
+If AIUtil.FindText("previous fiscal year").Exist(5) Then
+	AIUtil.FindText("previous fiscal year").CheckExists True
+	If Parameter.Item("FioriOrGUI") = "Fiori" Then
+		AIUtil("text_box", "Document Date:").Click
+		Set WshShell = CreateObject("WScript.Shell")
+	    	Wait(1)
+	    	WshShell.SendKeys "{ENTER}"
+	    	Set WshShell = Nothing
+	ElseIf Parameter.Item("FioriOrGUI") = "GUI" Then
+		SAPGuiSession("Session").SAPGuiWindow("Post Incoming Payments:").SendKey ENTER @@ hightlight id_;_0_;_script infofile_;_ZIP::ssf1.xml_;_
+	End If
+
 End If
 
-If AIUtil.FindText("The difference is too large for clearing").Exist(0) Then
- @@ hightlight id_;_0_;_script infofile_;_ZIP::ssf1.xml_;_
-	
-	AIUtil.FindTextBlock("15.00", micFromTop, 1).DoubleClick
-	AIUtil("button", "Post").Click
-	
-'	Parameter.Item("AmountAssigned") = AIUtil("text_box", "Assigned").GetValue
-'	Parameter.Item("AmountAssigned") = Replace(Parameter.Item("AmountAssigned"), " ", "")
-'	AIUtil.FindText("Processing Status").Click
-'	AIUtil.FindTextBlock("Cancel").Click
-'	AIUtil.FindTextBlock("Other line item").Click
-'	AIUtil.FindTextBlock("Cancel").Click
-'	AIUtil("button", "Yes").Click
-'	SetupPostIncomingPayments
+If AIUtil.FindText("too large for clearing").Exist(15) Then
+	If Parameter.Item("FioriOrGUI") = "Fiori" Then
+		Set WshShell = CreateObject("WScript.Shell")
+		Wait(1)
+		WshShell.SendKeys "+{F4}"
+	    	Set WshShell = Nothing
+	ElseIf Parameter.Item("FioriOrGUI") = "GUI" Then
+		AIUtil.FindTextBlock("15.00", micFromTop, 1).DoubleClick
+	End If
+ 	AIUtil("button", "Post").Click
 End If
 
-If Parameter.Item("FioriOrGUI") = "Fiori" Then
-	AIUtil.FindTextBlock("Help").Click
-End If
+'SAP S/4HANA 2020 (1909) code to get to the status message that sometimes doesn't appear
+'If Parameter.Item("FioriOrGUI") = "Fiori" Then
+'	AIUtil.FindTextBlock("Help").Click
+'End If
 AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 Set DocumentConfirmationMessage = AIRegex("Document \d+ was posted in company code \d+")
 AIUtil.FindTextBlock(DocumentConfirmationMessage).CheckExists True
