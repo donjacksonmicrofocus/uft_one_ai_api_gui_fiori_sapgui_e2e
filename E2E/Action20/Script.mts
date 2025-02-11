@@ -100,8 +100,15 @@ End If
 'End If
 AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 Set DocumentConfirmationMessage = AIRegex("Document \d+ was posted in company code \d+")
-AIUtil.FindTextBlock(DocumentConfirmationMessage).CheckExists True
+Do
+ 	If  	AIUtil("button", "Post").Exist(0) Then
+	 	AIUtil("button", "Post").Click
+	 Else
+	 	Exit Do
+ 	End If
+Loop Until AIUtil.FindTextBlock(DocumentConfirmationMessage).Exist(0)
 
+AIUtil.FindTextBlock(DocumentConfirmationMessage).CheckExists True
 DocumentMessage = AIUtil.FindTextBlock(DocumentConfirmationMessage).GetText
 DocumentMessageArray = Split(DocumentMessage," ")
 DocumentNumber = DocumentMessageArray(1)
