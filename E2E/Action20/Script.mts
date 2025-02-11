@@ -91,7 +91,6 @@ If AIUtil.FindText("too large for clearing").Exist(15) Then
 	ElseIf Parameter.Item("FioriOrGUI") = "GUI" Then
 		AIUtil.FindTextBlock("15.00", micFromTop, 1).DoubleClick
 	End If
- 	AIUtil("button", "Post").Click
 End If
 
 'SAP S/4HANA 2020 (1909) code to get to the status message that sometimes doesn't appear
@@ -101,7 +100,7 @@ End If
 AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 Set DocumentConfirmationMessage = AIRegex("Document \d+ was posted in company code \d+")
 Do
- 	If  	AIUtil("button", "Post").Exist(0) Then
+ 	If AIUtil("button", "Post").Exist(0) Then
 	 	AIUtil("button", "Post").Click
 	 Else
 	 	Exit Do
