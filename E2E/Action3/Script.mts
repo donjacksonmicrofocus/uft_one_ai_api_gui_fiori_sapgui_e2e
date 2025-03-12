@@ -26,7 +26,9 @@ Loop Until AIUtil.FindTextBlock("Apps").Exist
 counter = 0
 Do
 	counter = counter + 1
-	AIUtil.FindTextBlock("Create Sales Orders").Click
+	If AIUtil.FindTextBlock("Create Sales Orders").Exist(0) Then
+		AIUtil.FindTextBlock("Create Sales Orders").Click
+	End If
 	If counter >= 60 Then
 		msgbox "The Create Sales Order text block isn't disappearing like it should, check application"
 		ExitTest

@@ -1,6 +1,7 @@
 ﻿Set AppContext=Browser("CreationTime:=0")												'Set the variable for what application (in this case the browser) we are acting upon
 AIUtil.SetContext AppContext																'Tell the AI engine to point at the application
 'DJ241115	24.4 AIOD table recognition is significantly improved, changing to use table again
+AIUtil.FindTextBlock("Documents to be Processed").Click
 AIUtil.Table.Cell(1, 0).SetText DataTable.Value("DeliveryNumber")
 AIUtil("button", "Save").Click
 'AIUtil.Context.UnFreeze 

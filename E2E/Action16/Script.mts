@@ -6,7 +6,13 @@ If Parameter.Item("DeliveryNumber") = "Default" Then
 End If
 
 'AIUtil("text_box", "Actual GI Date:").SetText FormatDateTime(Date, 2)
-AIUtil("text_box", "Actual GI Date:").SetText "03/30/2024"
+If AIUtil("text_box", "Actual Gl Date:").Exist(0) Then
+	AIUtil("text_box", "Actual GI Date:").SetText "03/30/2024"
+ElseIf AIUtil("input", "Actual Gl Date").Exist(0) Then
+	AIUtil("input", "Actual Gl Date").SetText "03/30/2024"
+Else
+	msgbox "Can't find the Actual Gl Date field"
+End If
 AIUtil.FindTextBlock("Picking").Click
 
 XtoClick = (AIUtil.FindTextBlock("SLoc").GetObjectProperty ("width") /2)
