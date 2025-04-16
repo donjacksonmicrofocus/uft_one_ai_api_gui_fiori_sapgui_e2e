@@ -1,53 +1,50 @@
 ﻿Function SAPGUISetText (Object, Value, Label)
-'	counter = 0
-'	Do
-'		counter = counter + 1
+'DJ20250415	Update so that now the script passes in the findtext command of what the label.
+	counter = 0
+	Do
+		counter = counter + 1
 		Object.SetText Value
-'		AIUtil.FindTextBlock("Clearing Text:").Click
-''		CurrentValue = Object.GetValue
-''		msgbox "Comparing CurrentValue = " & CurrentValue & " and Value = " & Value
-'		msgbox "AIUtil.FindText(Value, micWithAnchorOnLeft, AIUtil.FindText(Label)).Exist(0) returns " & AIUtil.FindText(Value, micWithAnchorOnLeft, AIUtil.FindText(Label)).Exist(0)
-'		If counter >= 60 Then
-'			Reporter.ReportEvent micFail, "Set " & Object & " to " & Value, "Couldn't set the value after " & counter & " tries, aborting run."
-'			ExitAction
-'		End If
-''	Loop Until CurrentValue = Value
-'	Loop Until AIUtil.FindText(Value, micWithAnchorOnLeft, AIUtil.FindText(Label)).Exist(0)
+		Label.Click
+		If counter >= 60 Then
+			Reporter.ReportEvent micFail, "Set " & Object & " to " & Value & "", "Couldn't set the value after " & counter & " tries, aborting run."
+			ExitAction
+		End If
+	Loop Until AIUtil.FindText(Value, micWithAnchorOnLeft, Label).Exist(0)
 		
 End Function
 
 Function SetupPostIncomingPayments 
 	AIUtil.FindTextBlock("Document Date:").Click
-	AIUtil.Context.Freeze 
+'	AIUtil.Context.Freeze 
 	'AIUtil("text_box", "Account:", micFromBottom, 1).SetText "EWM17-CU02"
-	SAPGUISetText AIUtil("text_box", "Account:", micFromBottom, 1), "EWM17-CU02", "Account:"
-	SAPGUISetText AIUtil("text_box", "Account:", micFromBottom, 1), "EWM17-CU02", "Account:"
+	SAPGUISetText AIUtil("text_box", "Account:", micFromBottom, 1), "EWM17-CU02", AIUtil.FindText("Account:", micFromBottom, 1)
+'	SAPGUISetText AIUtil("text_box", "Account:", micFromBottom, 1), "EWM17-CU02", "Account:"
 	'AIUtil("text_box", "Value date:").SetText "03/10/2024"
-	SAPGUISetText AIUtil("text_box", "Value date:"), "03/10/2024", "Value date:"
+	SAPGUISetText AIUtil("text_box", "Value date:"), "03/10/2024", AIUtil.FindText("Value date:")
 	'AIUtil("text_box", "Amount").SetText Parameter.Item("AmountAssigned")
-	SAPGUISetText AIUtil("text_box", "Amount"), Parameter.Item("AmountAssigned"), "Amount"
+	SAPGUISetText AIUtil("text_box", "Amount"), Parameter.Item("AmountAssigned"), AIUtil.FindTextBlock("Amount:")
 	'AIUtil("text_box", "Account:", micFromTop, 1).SetText "11003000"
 	'AIUtil("text_box", "Account:", micFromTop, 1).SetText "10010000"
-	SAPGUISetText AIUtil("text_box", "Account:", micFromTop, 1), "11003000", "Account:"
+	SAPGUISetText AIUtil("text_box", "Account:", micFromTop, 1), "11003000", AIUtil.FindText("Account:", micFromTop, 1)
 	'AIUtil("text_box", "", micWithAnchorOnLeft, AIUtil.FindTextBlock("House Bank:")).SetText "USAC3"
-	SAPGUISetText AIUtil("text_box", "", micWithAnchorOnLeft, AIUtil.FindTextBlock("House Bank:")), "USAC3", "House Bank:"
+	SAPGUISetText AIUtil("text_box", "", micWithAnchorOnLeft, AIUtil.FindTextBlock("House Bank:")), "USAC3", AIUtil.FindText("House Bank:")
 	'AIUtil("text_box", "House Bank:").SetText "USBD2"
-	SAPGUISetTExt AIUtil("text_box", "House Bank:"), "USBD2", "House Bank:"
+	SAPGUISetText AIUtil("text_box", "House Bank:"), "USBD2", AIUtil.FindText("House Bank:")
 		
 	'AIUtil("text_box", "Period:").SetText "03"
-	SAPGUISetText AIUtil("text_box", "Period:"), "03",  "Period:"
+	SAPGUISetText AIUtil("text_box", "Period:"), "03",  AIUtil.FindText("Period:")
 	'AIUtil("text_box", "Posting Date:").SetText "03/10/2024"
-	SAPGUISetText AIUtil("text_box", "Posting Date:"), "03/10/2024", "Posting Date:"
+	SAPGUISetText AIUtil("text_box", "Posting Date:"), "03/10/2024", AIUtil.FindText("Posting Date:")
 	'AIUtil("text_box", "Company Code:").SetText "1710"
-	SAPGUISetText AIUtil("text_box", "Company Code:"), "1710", "Company Code:"
+	SAPGUISetText AIUtil("text_box", "Company Code:"), "1710", AIUtil.FindText("Company Code:")
 	'AIUtil("text_box", "Document Date:").SetText FormatDateTime(Date, 2)
 	
 	'TypeTextBox.SetText "DZ"
-	SAPGUISetText TypeTextBox, "DZ", TypeTextBox
+'	SAPGUISetText TypeTextBox, "DZ", AIUtil.FindText(TypeTextBox)
 	'AIUtil("text_box", "Document Date:").SetText "03/10/2024"
-	SAPGUISetText AIUtil("text_box", "Document Date:"), "03/10/2024", "Document Date:"
+	SAPGUISetText AIUtil("text_box", "Document Date:"), "03/10/2024", AIUtil.FindText("Document Date:")
 	AIUtil("button", "Post").Click
-	AIUtil.Context.Unfreeze
+'	AIUtil.Context.Unfreeze
 	
 End Function
 
@@ -63,8 +60,9 @@ ElseIf Parameter.Item("FioriOrGUI") = "GUI" Then
 Else
 	msgbox "Value not handled"
 End If
-
+AIUtil.RunSettings.OCR.UseConfigSet UFT_OCR
 SetupPostIncomingPayments
+AIUtil.RunSettings.OCR.UseConfigSet AI_OCR
 'Set AppContext = SAPGuiSession("micclass:=SAPGuiSession")
 'AIUtil.SetContext AppContext
 '

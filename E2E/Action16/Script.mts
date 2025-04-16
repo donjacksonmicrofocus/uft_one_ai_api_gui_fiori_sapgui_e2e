@@ -6,10 +6,11 @@ If Parameter.Item("DeliveryNumber") = "Default" Then
 End If
 
 'AIUtil("text_box", "Actual GI Date:").SetText FormatDateTime(Date, 2)
+'DJ20250416	The system had the open month changed to April 2025, updated the dates accordingly
 If AIUtil("text_box", "Actual Gl Date:").Exist(0) Then
-	AIUtil("text_box", "Actual GI Date:").SetText "03/30/2024"
+	AIUtil("text_box", "Actual GI Date:").SetText "04/15/2025"
 ElseIf AIUtil("input", "Actual Gl Date").Exist(0) Then
-	AIUtil("input", "Actual Gl Date").SetText "03/30/2024"
+	AIUtil("input", "Actual Gl Date").SetText "04/15/2025"
 Else
 	msgbox "Can't find the Actual Gl Date field"
 End If

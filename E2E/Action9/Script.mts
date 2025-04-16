@@ -4,7 +4,9 @@ AIUtil.SetContext AppContext																'Tell the AI engine to point at the 
 'set objSendKey=CreateObject("WScript.shell")
 'objSendKey.SendKeys "{F11}"
 
-AIUtil("button", "Save").Click
+'DJ20250402	White text on blue background not being seen by OCR any longer, any OCR
+AIUtil("button", micAnyText, micWithAnchorBelow, AIUtil.FindTextBlock("Cancel")).Click
+'AIUtil("button", "Save").Click
 AppContext.Sync																			'Wait for the browser to stop spinning
 Set OrderConfirmationMessage = AIRegex("Standard Order \d+ has been saved")
 AIUtil.FindTextBlock(OrderConfirmationMessage).CheckExists TRUE

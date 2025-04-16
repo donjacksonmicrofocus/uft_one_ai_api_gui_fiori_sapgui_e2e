@@ -1,5 +1,3 @@
 ﻿<Properties>
-  <WatchEntry0 value="AIUtil.FindTextBlock(&quot;0.00&quot;, micWithAnchorOnLeft, AIUtil.FindTextBlock(&quot;Assigned:&quot;)).Exist(0)" />
-  <WatchEntry1 value="AIUtil.FindText(&quot;too large for clearing&quot;).Exist(0)" />
-  <WatchEntry2 value="AIUtil.FindText(&quot;previous fiscal year&quot;).Exist(5)" />
+  <WatchEntry0 value=" AIUtil.FindTextBlock(&quot;Amount:&quot;).highlight" />
 </Properties>
